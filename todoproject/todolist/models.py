@@ -1,3 +1,7 @@
 from django.db import models
 
 # Create your models here.
+class Task(models.Model):
+    title = models.CharField(max_length=255),
+    deadlin = models.DateField(null=True, blank=True),
+    done = models.BooleanField()

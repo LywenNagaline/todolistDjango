@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block content_title %}
+    Liste des tâches
+{% endblock %}
+
+{% block content %}
+    {% if task_list %}
+        <ol>
+            {% for task in task_list %}
+            <li><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>Aucune tache !</p>
+    {% endif %}
+{% endblock %}

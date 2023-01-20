@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+
+{% block content_title %}
+    {{ task.title }}    
+{% endblock %}
+
+{% block content %}
+    <p>{{ task.deadline}}</p>
+    <p>
+        {% if task.done%} 
+            Tâche faite ! 
+        {%endif%}
+    </p>
+{% endblock %}

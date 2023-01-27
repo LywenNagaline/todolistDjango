@@ -16,3 +16,15 @@ class TestTodoList(TestCase):
         response = self.client.get('/todo/tasks/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Ma tâche")
+
+    # tester que le formulaire réussisse bien à inscrire une tâche en BDD
+    def test_task_add(self):
+        response = self.client.post('/todo/add_task/', 
+        data={
+            'title':'Faire le test',
+            'deadline':'2023-01-27',
+            'done':False
+            }
+        )
+        task2 = Task.objects.filter(title="Faire le test")
+        self.assertEqual(task2.count(), 1)

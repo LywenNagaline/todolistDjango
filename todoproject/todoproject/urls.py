@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from todolist import views
+from todoproject import views as project_views
 
 
 urlpatterns = [
@@ -23,4 +24,6 @@ urlpatterns = [
     path ('', views.index),
     path('todo/', include('todolist.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
+    path('contact/', project_views.contact),
+    path('thanks/', project_views.thanks)
 ]

@@ -1,15 +1,23 @@
 from rest_framework import serializers
-from todolist.models import Task
+from todolist.models import Task, TaskList
 
-class TaskSerializer(serializers.HyperlinkedModelSerializer):
+class TaskListSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = TaskList
+        fields = ('name', 'task_set')
+
+class NotSimpleTaskSerializer(serializers.Serializer):
+    task_list = serializers.StringRelatedField()
     class Meta:
         model = Task
-        fields = ('title', 'deadline', 'done')
+        fields = ('title', 'deadline', 'done', 'task_list')
 
 class TaskSerializer(serializers.Serializer):
+    id = serializers.IntegerField(required=False)
     title = serializers.CharField(max_length=200)
     deadline = serializers.DateField(required=False)
     done = serializers.BooleanField()
+    task_list = serializers.StringRelatedField()
 
     def create(self, validated_data):
         return Task.objects.create(**validated_data)
